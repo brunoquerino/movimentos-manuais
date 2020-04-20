@@ -1,0 +1,113 @@
+<div>
+    <div class="panel panel-default">
+
+        <div class="panel-heading">Movimento</div>
+        <div class="panel-body">
+            <form ng-submit="vm.incluir(vm.formMovimento)">
+
+                <div class="form row form-group">
+                    <div class=" col-xs-12  col-sm-6 col-md-4 col-lg-3">
+                        <label for="mesMovimento" class="col-xs-4 col-sm-12 col-md-4 col-form-label">Mês</label>
+                        <div class="col-xs-8 col-sm-12 col-md-8">
+                            <input ng-disabled="!vm.novoHabilitado" required type="number" ng-model="vm.formMovimento.mes"  min="01" max="12" class="form-control-plaintext" id="mesMovimento">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <label for="anoMovimento" class="col-xs-4 col-sm-12 col-md-4 col-form-label">Ano</label>
+                        <div class="col-xs-8 col-sm-12 col-md-8">
+                            <input ng-disabled="!vm.novoHabilitado" required minlength="4" type="text" ng-model="vm.formMovimento.ano" class="form-control-plaintext" id="anoMovimento">
+                        </div>
+                    </div>
+                    <div class="hidden-xs hidden-sm col-md-4 col-lg-6"></div>
+                </div>
+                <div class="form row form-group">
+                    <div class=" col-xs-12  col-sm-6 col-md-4 col-lg-3">
+                        <label for="produtoMovimento" class="col-xs-4 col-sm-12 col-md-4 col-form-label">Produto</label>
+                        <div class="col-xs-8 col-sm-12 col-md-8">
+                            <select ng-disabled="!vm.novoHabilitado" class="form-control-plaintext" id="produtoMovimento" ng-model="vm.formMovimento.codigo_produto">
+                                <option value=""></option>
+                                <option required ng-repeat="produto in vm.produtos" value="{{produto.codigo}}" ng-bind="produto.descricao"></option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <label for="cosifMovimento" class="col-xs-4 col-sm-12 col-md-4 col-form-label">Cosif</label>
+                        <div class="col-xs-8 col-sm-12 col-md-8">
+                            <select ng-disabled="!vm.novoHabilitado" required class="form-control-plaintext" id="cosifMovimento" ng-model="vm.formMovimento.codigo_cosif">
+                                <option   value="" ></option>
+                                <option  ng-repeat="cosif in vm.listaCosif" value="{{cosif.codigo}}" ng-bind="cosif.codigo"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="hidden-xs hidden-sm col-md-4 col-lg-6"></div>
+                </div>
+                <div class="form row form-group">
+                    <div class=" col-xs-12  col-sm-6 col-md-4 col-lg-3">
+                        <label for="valorMovimento" class="col-xs-4 col-sm-12 col-md-4 col-form-label">Valor</label>
+                        <div class="col-xs-8 col-sm-12 col-md-8">
+                            <input ng-disabled="!vm.novoHabilitado" type="tel" required ng-model="vm.formMovimento.valor" pattern="[0-9]{1,}[,]{0,}[0-9]{0,}"  class="form-control-plaintext" id="valorMovimento">
+                        </div>
+
+                    </div>
+                    <div class="hidden-xs col-sm-6 col-md-4 col-lg-3">
+                    </div>
+                    <div class="hidden-xs hidden-sm col-md-4 col-lg-6"></div>
+                </div>
+                <div class="form row form-group">
+                    <div class=" col-xs-12  col-sm-6 col-md-4 col-lg-3">
+                        <label for="descricaoMovimento" class="col-xs-4 col-sm-12 col-md-4 col-form-label">Descrição</label>
+                        <div class="col-xs-8 col-sm-12 col-md-8">
+                            <textarea ng-disabled="!vm.novoHabilitado" required cols="30" rows="4" ng-model="vm.formMovimento.descricao"   class="form-control-plaintext" id="descricaoMovimento"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="hidden-xs col-sm-6 col-md-4 col-lg-3">
+                    </div>
+                    <div class="hidden-xs hidden-sm col-md-4 col-lg-6"></div>
+                </div>
+               
+                <button type="submit" class="btn" ng-disabled="!vm.novoHabilitado">Incluir</button>
+                <button type="reset" class="btn" ng-disabled="!vm.novoHabilitado">Limpar</button>
+                <button type="button" class="btn" ng-disabled="vm.novoHabilitado" ng-click="vm.habilitarNovo()" >Novo</button>
+
+
+            </form>
+
+
+
+        </div>
+
+    </div>
+    <div class="panel panel-default">
+
+        <div class="panel-heading">Lista</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Mês</th>
+                        <th>Ano</th>
+                        <th>Código do Produto</th>
+                        <th>Descrição do Produto</th>
+                        <th>NR Lançamento</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="movimento in vm.movimentos">
+                        <td>{{movimento.mes}}</td>
+                        <td>{{movimento.ano}}</td>
+                        <td>{{movimento.produto.codigo_produto}}</td>
+                        <td>{{movimento.produto.descricao_produto}}</td>
+                        <td>{{movimento.numero}}</td>
+                        <td>{{movimento.descricao}}</td>
+                        <td>{{movimento.valor| currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--<lista-de-pedidos pedidos="vm.pedidos"></lista-de-pedidos>-->
+    </div>
