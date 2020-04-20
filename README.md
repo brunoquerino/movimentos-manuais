@@ -11,6 +11,6 @@ spring-boot 2.0.1.RELEASE
 spring-boot-starter-data-jpa
 AngularJs
 
-## Como rodae
+## Executar
 mvn spring-boot:run
 abrir: http://localhost:8080/
