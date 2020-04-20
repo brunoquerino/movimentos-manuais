@@ -13,4 +13,5 @@ AngularJs
 
 ## Executar
 mvn spring-boot:run
+
 abrir: http://localhost:8080/
